@@ -81,13 +81,29 @@ int main(){
     
     FILE *file = fopen(path, "r");
 
+    if(file == NULL){
+        printf("could not open file\n");
+        return 1;
+    }
+
     int n = 0;
     char *content = (char *)malloc(n *sizeof(char));
+
+    if(content == NULL){
+        printf("out of memory\n");
+        return 1;
+    }
+
     int c;
     while((c = getc(file)) != EOF){
         content[n] = c;
         ++n;
         content = realloc(content, n * sizeof(char));
+        
+        if(content == NULL){
+            printf("out of memory\n");
+            return 1;
+        }
     }
 
     interpret(content);
