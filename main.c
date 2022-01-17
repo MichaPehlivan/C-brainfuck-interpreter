@@ -69,10 +69,8 @@ void interpret(char *commands){
     }
 }
 
-int main(){
-    printf("file to interpret: ");
-    char path[21];
-    scanf("%20s", &path);
+int main(int argc, char const *argv[]){
+    const char *path = argv[1];
     
     FILE *file = fopen(path, "r");
 
