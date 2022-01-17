@@ -22,23 +22,11 @@ int findbracket(char *commands, int currentpos){
     }
 }
 
-//searches backwards for matching bracket
-int rfindbracket(char *commands, int currentpos){
-    int lb = 0;
-    int rb = 0;
-
-    for(int i = currentpos; i > 0; --i){
-        if(commands[i] == '[') ++lb;
-        if(commands[i] == ']') ++rb;
-
-        if(lb == rb){
-            return i;
-        }
-    }
-}
-
 //executes brainfuck commands in a string
 void interpret(char *commands){
+
+    int stack[10];
+    int *pStack = stack;
 
     for(int i = 0; i < strlen(commands); ++i){
         char command = commands[i];
@@ -65,10 +53,17 @@ void interpret(char *commands){
             if(*ptr == 0){
                 i = findbracket(commands, i);
             }
+            else{
+                ++pStack;
+                *pStack = i;
+            }
         }
         else if(command == ']'){
             if(*ptr != 0){
-                i = rfindbracket(commands, i);
+                i = *pStack;
+            }
+            else{
+                --pStack;
             }
         }
     }
