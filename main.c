@@ -91,7 +91,7 @@ int main(int argc, char const *argv[]){
     while((c = getc(file)) != EOF){
         content[n] = c;
         ++n;
-        content = realloc(content, n * sizeof(char));
+        content = realloc(content, n * sizeof(char) + 1);
         
         if(content == NULL){
             printf("out of memory\n");
