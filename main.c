@@ -79,7 +79,7 @@ int main(int argc, char const *argv[]){
         return 1;
     }
 
-    int n = 0;
+    int n = 1;
     char *content = (char *)malloc(n *sizeof(char));
 
     if(content == NULL){
@@ -89,9 +89,9 @@ int main(int argc, char const *argv[]){
 
     int c;
     while((c = getc(file)) != EOF){
-        content[n] = c;
+        content[n-1] = c;
         ++n;
-        content = realloc(content, n * sizeof(char) + 1);
+        content = realloc(content, n * sizeof(char));
         
         if(content == NULL){
             printf("out of memory\n");
